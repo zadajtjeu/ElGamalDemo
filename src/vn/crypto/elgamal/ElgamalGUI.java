@@ -156,7 +156,7 @@ public class ElgamalGUI extends javax.swing.JFrame {
         });
 
         btnDecrypt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnDecrypt.setText("Encrypt");
+        btnDecrypt.setText("Decrypt");
         btnDecrypt.setEnabled(false);
         btnDecrypt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,16 +204,17 @@ public class ElgamalGUI extends javax.swing.JFrame {
                         .addComponent(btnDecrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(73, 73, 73))))
             .addGroup(jpnCryptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnCryptoLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(jpnCryptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(455, Short.MAX_VALUE))
                 .addGroup(jpnCryptoLayout.createSequentialGroup()
-                    .addGap(83, 83, 83)
-                    .addComponent(btnEncrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(502, Short.MAX_VALUE)))
+                    .addGroup(jpnCryptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jpnCryptoLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(jpnCryptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane1)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jpnCryptoLayout.createSequentialGroup()
+                            .addGap(83, 83, 83)
+                            .addComponent(btnEncrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(455, Short.MAX_VALUE)))
         );
         jpnCryptoLayout.setVerticalGroup(
             jpnCryptoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
