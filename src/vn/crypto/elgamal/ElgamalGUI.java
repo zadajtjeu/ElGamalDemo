@@ -348,9 +348,9 @@ public class ElgamalGUI extends javax.swing.JFrame {
             }
             jtaEncryptCipherText.setText(ban_ma);
 
-            // e y1= alpha ^k  mod p
+            // e y1= alpha ^a  mod p
             // e y2 = x* beta^k mod p
-
+            // destroy k
             jtaDecryptCipherText.setText(ban_ma);
             btnDecrypt.setEnabled(true);
         }
@@ -361,7 +361,6 @@ public class ElgamalGUI extends javax.swing.JFrame {
         String banMa = jtaDecryptCipherText.getText();
         int p = Integer.valueOf(jtfP.getText());
         int a = Integer.valueOf(jtfA.getText());
-        int k = p - a - 1;
         
         int j=0;
         while (j < banMa.length()) {
@@ -369,12 +368,13 @@ public class ElgamalGUI extends javax.swing.JFrame {
             arr_ban_ma.add((int)banMa.charAt(++j));
             j++;
         }
-        
-        int y1 = BinhPhuongNhan(arr_ban_ma.get(0), k, p);
+        //d = y2(y1^a)^-1 mod p
+        int K = BinhPhuongNhan(arr_ban_ma.get(0), a, p); // K = y1 ^ a mod p
         String ban_ro = "";
 
         for (int i = 1; i < arr_ban_ma.size(); i += 2) {
-            ban_ro += (char) ((arr_ban_ma.get(i) * y1) % p);
+            // d = y2(K)^-1 mod p
+            ban_ro += (char) ((arr_ban_ma.get(i) * modInverse(K, p)) % p);
         }
         jtaDecryptPlainText.setText(ban_ro);
     }//GEN-LAST:event_btnDecryptActionPerformed
@@ -429,7 +429,39 @@ public class ElgamalGUI extends javax.swing.JFrame {
         return ketqua;
     }
     
-    
+    // a^-1 mod m
+    static int modInverse(int a, int m) {
+        int m0 = m;
+        int y = 0, x = 1;
+
+        if (m == 1) {
+            return 0;
+        }
+
+        while (a > 1) {
+            // q is quotient
+            int q = a / m;
+
+            int t = m;
+
+            // m is remainder now, process
+            // same as Euclid's algo
+            m = a % m;
+            a = t;
+            t = y;
+
+            // Update x and y
+            y = x - q * y;
+            x = t;
+        }
+
+        // Make x positive
+        if (x < 0) {
+            x += m0;
+        }
+
+        return x;
+    }
         
     /**
      * @param args the command line arguments
